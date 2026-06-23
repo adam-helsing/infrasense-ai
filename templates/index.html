@@ -1,0 +1,341 @@
+{% extends "base.html" %}
+
+{% block title %}InfraSense AI{% endblock %}
+
+{% block content %}
+
+<!-- Navigation -->
+<nav class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto flex justify-between items-center px-8 py-5">
+
+        <h1 class="text-2xl font-bold text-blue-600">
+            InfraSense<span class="text-slate-800">AI</span>
+        </h1>
+
+        <div class="hidden md:flex gap-8 text-slate-700 font-medium">
+            <a href="#" class="hover:text-blue-600">Home</a>
+            <a href="#" class="hover:text-blue-600">Features</a>
+            <a href="#" class="hover:text-blue-600">How it Works</a>
+            <a href="#" class="hover:text-blue-600">Contact</a>
+        </div>
+
+        <button class="bg-blue-600 text-white px-5 py-2 rounded-xl hover:bg-blue-700 transition">
+            Login
+        </button>
+
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="max-w-7xl mx-auto px-8 py-20">
+
+<div class="grid md:grid-cols-2 gap-12 items-center">
+
+<div>
+
+<span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm">
+🚀 AI Powered Civic Platform
+</span>
+
+<h1 class="text-6xl font-bold mt-6 leading-tight text-slate-800">
+
+Building
+<span class="text-blue-600">Smarter Cities</span>
+with AI
+
+</h1>
+
+<p class="text-slate-500 mt-6 text-lg leading-8">
+
+Report potholes, garbage, broken streetlights and
+other civic issues using AI-powered image analysis.
+Track them in real time and help build better communities.
+
+</p>
+
+<div class="flex gap-5 mt-10">
+
+<button class="bg-blue-600 text-white px-8 py-4 rounded-xl text-lg hover:bg-blue-700 transition">
+
+Report Issue
+
+</button>
+
+<button class="border border-slate-300 px-8 py-4 rounded-xl text-lg hover:bg-slate-100 transition">
+
+View Dashboard
+
+</button>
+
+</div>
+
+</div>
+
+<div class="flex justify-center">
+
+    <div class="bg-gradient-to-br from-blue-600 to-cyan-500 rounded-3xl shadow-2xl p-8 w-full max-w-md">
+
+        <h2 class="text-2xl font-bold text-white mb-6">
+            🤖 AI Analysis Preview
+        </h2>
+
+        <div class="bg-white rounded-xl p-4 mb-4 shadow">
+            <p class="font-semibold text-slate-700">
+                📍 Issue Detected
+            </p>
+
+            <p class="text-slate-500">
+                Large Road Pothole
+            </p>
+        </div>
+
+        <div class="bg-white rounded-xl p-4 mb-4 shadow">
+
+            <p class="font-semibold text-slate-700">
+                ⚠ Severity
+            </p>
+
+            <span class="text-red-500 font-bold">
+                HIGH
+            </span>
+
+        </div>
+
+        <div class="bg-white rounded-xl p-4 mb-4 shadow">
+
+            <p class="font-semibold text-slate-700">
+                🏢 Department
+            </p>
+
+            <p class="text-slate-500">
+                Road Maintenance
+            </p>
+
+        </div>
+
+        <div class="bg-white rounded-xl p-4 shadow">
+
+            <p class="font-semibold text-slate-700">
+                🤖 Gemini AI Confidence
+            </p>
+
+            <div class="w-full bg-gray-200 rounded-full h-3 mt-3">
+
+                <div class="bg-green-500 h-3 rounded-full w-[96%]"></div>
+
+            </div>
+
+            <p class="text-right mt-2 font-bold text-green-600">
+                96%
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Stats -->
+
+<section class="max-w-6xl mx-auto py-12">
+
+<div class="grid md:grid-cols-4 gap-6">
+
+<div class="bg-white shadow-lg rounded-2xl p-8 text-center">
+
+<h2 class="text-4xl font-bold text-blue-600">245+</h2>
+
+<p class="text-slate-500 mt-2">Issues Reported</p>
+
+</div>
+
+<div class="bg-white shadow-lg rounded-2xl p-8 text-center">
+
+<h2 class="text-4xl font-bold text-green-500">91%</h2>
+
+<p class="text-slate-500 mt-2">AI Accuracy</p>
+
+</div>
+
+<div class="bg-white shadow-lg rounded-2xl p-8 text-center">
+
+<h2 class="text-4xl font-bold text-orange-500">32</h2>
+
+<p class="text-slate-500 mt-2">Communities</p>
+
+</div>
+
+<div class="bg-white shadow-lg rounded-2xl p-8 text-center">
+
+<h2 class="text-4xl font-bold text-purple-500">24/7</h2>
+
+<p class="text-slate-500 mt-2">Monitoring</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Features Section --> 
+<section class="py-24 bg-white">
+
+<div class="max-w-7xl mx-auto px-8">
+
+<h2 class="text-5xl font-bold text-center text-slate-800">
+Why Choose <span class="text-blue-600">InfraSense AI?</span>
+</h2>
+
+<p class="text-center text-slate-500 mt-5 text-lg">
+AI-powered infrastructure monitoring for smarter communities.
+</p>
+
+<div class="grid md:grid-cols-4 gap-8 mt-16">
+
+<div class="p-8 rounded-2xl shadow-lg hover:shadow-xl transition">
+
+<div class="text-5xl mb-4">🧠</div>
+
+<h3 class="font-bold text-xl">AI Detection</h3>
+
+<p class="text-slate-500 mt-3">
+Gemini AI automatically analyzes uploaded images.
+</p>
+
+</div>
+
+<div class="p-8 rounded-2xl shadow-lg hover:shadow-xl transition">
+
+<div class="text-5xl mb-4">📍</div>
+
+<h3 class="font-bold text-xl">Location Tracking</h3>
+
+<p class="text-slate-500 mt-3">
+Pin every issue on an interactive city map.
+</p>
+
+</div>
+
+<div class="p-8 rounded-2xl shadow-lg hover:shadow-xl transition">
+
+<div class="text-5xl mb-4">📊</div>
+
+<h3 class="font-bold text-xl">Analytics</h3>
+
+<p class="text-slate-500 mt-3">
+Track reports with smart dashboards and insights.
+</p>
+
+</div>
+
+<div class="p-8 rounded-2xl shadow-lg hover:shadow-xl transition">
+
+<div class="text-5xl mb-4">🤝</div>
+
+<h3 class="font-bold text-xl">Community</h3>
+
+<p class="text-slate-500 mt-3">
+Citizens collaborate to improve local infrastructure.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- najxn-->
+
+<section class="py-24">
+
+<div class="max-w-6xl mx-auto px-8">
+
+<h2 class="text-5xl font-bold text-center">
+
+How It Works
+
+</h2>
+
+<div class="grid md:grid-cols-3 gap-12 mt-20 text-center">
+
+<div>
+
+<div class="text-6xl">📷</div>
+
+<h3 class="text-2xl font-bold mt-5">
+Upload
+</h3>
+
+<p class="text-slate-500 mt-4">
+Upload an image of the civic issue.
+</p>
+
+</div>
+
+<div>
+
+<div class="text-6xl">🤖</div>
+
+<h3 class="text-2xl font-bold mt-5">
+AI Analysis
+</h3>
+
+<p class="text-slate-500 mt-4">
+Gemini detects category, severity and department.
+</p>
+
+</div>
+
+<div>
+
+<div class="text-6xl">📊</div>
+
+<h3 class="text-2xl font-bold mt-5">
+Track Progress
+</h3>
+
+<p class="text-slate-500 mt-4">
+Monitor issue status until it is resolved.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Footer-->
+
+<footer class="bg-slate-900 text-white py-10">
+
+<div class="max-w-7xl mx-auto px-8 flex justify-between items-center flex-wrap gap-6">
+
+<div>
+
+<h2 class="text-2xl font-bold">
+InfraSense AI
+</h2>
+
+<p class="text-slate-400 mt-2">
+See Smarter. Fix Faster.
+</p>
+
+</div>
+
+<p class="text-slate-400">
+© 2026 InfraSense AI. Built for the Coding Ninjas × Google Developer Hackathon.
+</p>
+
+</div>
+
+</footer>
+{% endblock %}
