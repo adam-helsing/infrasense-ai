@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+
+{% block title %}Report Issue{% endblock %}
+
+{% block content %}
+
+<div class="max-w-6xl mx-auto py-16 px-6">
+
+    <!-- Heading -->
+    <div class="text-center mb-12">
+        <h1 class="text-5xl font-bold text-slate-800">
+            Report a Civic Issue
+        </h1>
+
+        <p class="text-slate-500 mt-4 text-lg">
+            Upload an image and let AI identify the issue.
+        </p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-10">
+
+        <!-- LEFT SIDE -->
+        <div class="bg-white rounded-3xl shadow-xl p-8">
+
+            <label class="block text-lg font-semibold mb-4">
+                Upload Image
+            </label>
+
+            <input
+                type="file"
+                id="imageInput"
+                accept="image/*"
+                class="w-full border rounded-xl p-3">
+
+            <div class="mt-8">
+
+                <img
+                    id="preview"
+                    src=""
+                    alt="Preview"
+                    class="hidden rounded-2xl shadow-lg w-full">
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT SIDE -->
+
+        <div class="bg-white rounded-3xl shadow-xl p-8">
+
+            <label class="font-semibold">
+                Location
+            </label>
+
+            <input
+                id="location"
+                type="text"
+                placeholder="Enter issue location..."
+                class="w-full border rounded-xl p-3 mt-2 mb-6">
+
+            <label class="font-semibold">
+                Description
+            </label>
+
+            <textarea
+                id="description"
+                rows="5"
+                placeholder="Describe the issue..."
+                class="w-full border rounded-xl p-3 mt-2"></textarea>
+
+            <button
+                id="analyzeBtn"
+                type="button"
+                class="mt-8 w-full bg-blue-600 text-white py-4 rounded-xl hover:bg-blue-700 transition">
+
+                🤖 Analyze with AI
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- AI RESULT -->
+
+    <div
+        id="resultCard"
+        class="hidden mt-12 bg-white rounded-3xl shadow-xl p-8">
+
+        <h2 class="text-3xl font-bold mb-8">
+            🤖 AI Analysis Result
+        </h2>
+
+        <div class="grid md:grid-cols-2 gap-6">
+
+            <div>
+                <p class="font-semibold">Category</p>
+                <p id="category" class="text-blue-600 font-bold">-</p>
+            </div>
+
+            <div>
+                <p class="font-semibold">Severity</p>
+                <p id="severity" class="text-red-600 font-bold">-</p>
+            </div>
+
+            <div>
+                <p class="font-semibold">Department</p>
+                <p id="department" class="text-purple-600 font-bold">-</p>
+            </div>
+
+            <div>
+                <p class="font-semibold">Confidence</p>
+                <p id="confidence" class="text-green-600 font-bold">-</p>
+            </div>
+
+            <div>
+                <p class="font-semibold">Summary</p>
+                <p id="summary">-</p>
+            </div>
+
+            <div>
+                <p class="font-semibold">Recommended Action</p>
+                <p id="action">-</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const imageInput = document.getElementById("imageInput");
+const preview = document.getElementById("preview");
+const analyzeBtn = document.getElementById("analyzeBtn");
+const resultCard = document.getElementById("resultCard");
+
+// Preview image
+imageInput.addEventListener("change", () => {
+
+    const file = imageInput.files[0];
+
+    if (!file) return;
+
+    preview.src = URL.createObjectURL(file);
+
+    preview.classList.remove("hidden");
+
+});
+
+// Analyze Image
+analyzeBtn.addEventListener("click", async () => {
+
+    if (!imageInput.files.length) {
+
+        alert("Please upload an image first.");
+
+        return;
+
+    }
+
+    analyzeBtn.disabled = true;
+    analyzeBtn.innerHTML = "🔄 Analyzing...";
+
+    const formData = new FormData();
+
+    formData.append("image", imageInput.files[0]);
+
+    try {
+
+        const response = await fetch("/analyze", {
+
+            method: "POST",
+
+            body: formData
+
+        });
+
+        const data = await response.json();
+
+        document.getElementById("category").innerText = data.category;
+        document.getElementById("severity").innerText = data.severity;
+        document.getElementById("department").innerText = data.department;
+        document.getElementById("confidence").innerText = data.confidence;
+        document.getElementById("summary").innerText = data.summary;
+        document.getElementById("action").innerText = data.recommended_action;
+
+        resultCard.classList.remove("hidden");
+
+        resultCard.scrollIntoView({
+            behavior: "smooth"
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("AI Analysis Failed.");
+
+    }
+
+    analyzeBtn.disabled = false;
+
+    analyzeBtn.innerHTML = "🤖 Analyze with AI";
+
+});
+
+</script>
+
+{% endblock %}

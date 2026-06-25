@@ -8,20 +8,19 @@
 <nav class="bg-white shadow-sm sticky top-0 z-50">
     <div class="max-w-7xl mx-auto flex justify-between items-center px-8 py-5">
 
-        <h1 class="text-2xl font-bold text-blue-600">
-            InfraSense<span class="text-slate-800">AI</span>
-        </h1>
+      <a href="/" class="text-2xl font-bold">
+    <span class="text-blue-600">Infra</span><span class="text-slate-800">Sense</span><span class="text-cyan-500">AI</span>
+</a>
 
         <div class="hidden md:flex gap-8 text-slate-700 font-medium">
-            <a href="#" class="hover:text-blue-600">Home</a>
-            <a href="#" class="hover:text-blue-600">Features</a>
-            <a href="#" class="hover:text-blue-600">How it Works</a>
-            <a href="#" class="hover:text-blue-600">Contact</a>
+           <a href="/" class="hover:text-blue-600 transition">Home</a>
+
+        <a href="/report" class="hover:text-blue-600 transition">Report Issue</a>
+        <a href="/dashboard" class="hover:text-blue-600 transition">Dashboard</a>
+        <a href="#about" class="hover:text-blue-600 transition">About</a>
         </div>
 
-        <button class="bg-blue-600 text-white px-5 py-2 rounded-xl hover:bg-blue-700 transition">
-            Login
-        </button>
+        <a href="/login" class="bg-blue-600 text-white px-5 py-2 rounded-xl hover:bg-blue-700 transition">Login</a>
 
     </div>
 </nav>
@@ -55,17 +54,15 @@ Track them in real time and help build better communities.
 
 <div class="flex gap-5 mt-10">
 
-<button class="bg-blue-600 text-white px-8 py-4 rounded-xl text-lg hover:bg-blue-700 transition">
+<a href="/report"
+   class="bg-blue-600 text-white px-8 py-4 rounded-xl text-lg hover:bg-blue-700 transition inline-block">
+    Report Issue
+</a>
 
-Report Issue
-
-</button>
-
-<button class="border border-slate-300 px-8 py-4 rounded-xl text-lg hover:bg-slate-100 transition">
-
-View Dashboard
-
-</button>
+<a href="/dashboard"
+   class="border border-slate-300 px-8 py-4 rounded-xl text-lg hover:bg-slate-100 transition inline-block">
+    View Dashboard
+</a>
 
 </div>
 
@@ -116,7 +113,7 @@ View Dashboard
         <div class="bg-white rounded-xl p-4 shadow">
 
             <p class="font-semibold text-slate-700">
-                🤖 Gemini AI Confidence
+                🤖 AI Analysis Preview
             </p>
 
             <div class="w-full bg-gray-200 rounded-full h-3 mt-3">
@@ -196,19 +193,19 @@ AI-powered infrastructure monitoring for smarter communities.
 
 <div class="grid md:grid-cols-4 gap-8 mt-16">
 
-<div class="p-8 rounded-2xl shadow-lg hover:shadow-xl transition">
+<div class="p-8 rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-2 transition duration-300 cursor-pointer">
 
 <div class="text-5xl mb-4">🧠</div>
 
 <h3 class="font-bold text-xl">AI Detection</h3>
 
 <p class="text-slate-500 mt-3">
-Gemini AI automatically analyzes uploaded images.
+AI automatically analyzes uploaded images to identify civic issues.
 </p>
 
 </div>
 
-<div class="p-8 rounded-2xl shadow-lg hover:shadow-xl transition">
+<div class="p-8 rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-2 transition duration-300 cursor-pointer">
 
 <div class="text-5xl mb-4">📍</div>
 
@@ -220,7 +217,7 @@ Pin every issue on an interactive city map.
 
 </div>
 
-<div class="p-8 rounded-2xl shadow-lg hover:shadow-xl transition">
+<div class="p-8 rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-2 transition duration-300 cursor-pointer">
 
 <div class="text-5xl mb-4">📊</div>
 
@@ -232,7 +229,7 @@ Track reports with smart dashboards and insights.
 
 </div>
 
-<div class="p-8 rounded-2xl shadow-lg hover:shadow-xl transition">
+<div class="p-8 rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-2 transition duration-300 cursor-pointer">
 
 <div class="text-5xl mb-4">🤝</div>
 
@@ -288,7 +285,7 @@ AI Analysis
 </h3>
 
 <p class="text-slate-500 mt-4">
-Gemini detects category, severity and department.
+AI automatically analyzes uploaded images to identify civic issues.
 </p>
 
 </div>
@@ -315,7 +312,7 @@ Monitor issue status until it is resolved.
 
 <!-- Footer-->
 
-<footer class="bg-slate-900 text-white py-10">
+<footer id="about" class="bg-slate-900 text-white py-10">
 
 <div class="max-w-7xl mx-auto px-8 flex justify-between items-center flex-wrap gap-6">
 

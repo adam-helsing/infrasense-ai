@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="max-w-7xl mx-auto py-12 px-8">
+
+<h1 class="text-5xl font-bold mb-10 text-slate-800">
+📊 Dashboard
+</h1>
+
+<div class="grid md:grid-cols-4 gap-6">
+
+<div class="bg-blue-600 text-white rounded-2xl p-6 shadow-lg">
+<h2 class="text-lg">Total Reports</h2>
+<p class="text-4xl font-bold mt-4">{{ total_reports }}</p>
+</div>
+
+<div class="bg-red-500 text-white rounded-2xl p-6 shadow-lg">
+<h2 class="text-lg">High Severity</h2>
+<p class="text-4xl font-bold mt-4">{{ high }}</p>
+</div>
+
+<div class="bg-yellow-500 text-white rounded-2xl p-6 shadow-lg">
+<h2 class="text-lg">Medium Severity</h2>
+<p class="text-4xl font-bold mt-4">{{ medium }}</p>
+</div>
+
+<div class="bg-green-600 text-white rounded-2xl p-6 shadow-lg">
+<h2 class="text-lg">Low Severity</h2>
+<p class="text-4xl font-bold mt-4">{{ low }}</p>
+</div>
+
+</div>
+
+<h2 class="text-3xl font-bold mt-14 mb-6">
+Recent Reports
+</h2>
+
+<div class="overflow-x-auto bg-white rounded-2xl shadow-lg">
+
+<table class="w-full">
+
+<thead class="bg-slate-100">
+
+<tr>
+
+<th class="p-4 text-left">Category</th>
+<th class="p-4 text-left">Severity</th>
+<th class="p-4 text-left">Department</th>
+<th class="p-4 text-left">Confidence</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for report in reports %}
+
+<tr class="border-t hover:bg-slate-50">
+
+<td class="p-4">{{ report.category }}</td>
+
+<td class="p-4">
+
+{% if report.severity=="High" %}
+
+<span class="text-red-600 font-bold">
+{{ report.severity }}
+</span>
+
+{% elif report.severity=="Medium" %}
+
+<span class="text-yellow-600 font-bold">
+{{ report.severity }}
+</span>
+
+{% else %}
+
+<span class="text-green-600 font-bold">
+{{ report.severity }}
+</span>
+
+{% endif %}
+
+</td>
+
+<td class="p-4">{{ report.department }}</td>
+
+<td class="p-4">{{ report.confidence }}</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+{% endblock %}
