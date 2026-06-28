@@ -33,11 +33,11 @@
                 📷 Upload Image
             </h2>
 
-            <input
+           <input
                 type="file"
                 id="imageInput"
                 accept="image/*"
-                class="w-full border-2 border-dashed border-blue-300 rounded-2xl p-4">
+                class="w-full border-2 border-dashed border-blue-400 rounded-2xl p-6 bg-slate-50 hover:bg-blue-50 transition cursor-pointer">
 
             <img
                 id="preview"
@@ -282,6 +282,7 @@ imageInput.addEventListener("change", () => {
     preview.src = URL.createObjectURL(file);
 
     preview.classList.remove("hidden");
+    preview.classList.add("animate-pulse");
 
 });
 
@@ -314,6 +315,7 @@ analyzeBtn.addEventListener("click", async () => {
     step4.className = "text-gray-400";
 
     analyzeBtn.disabled = true;
+    analyzeBtn.classList.add("opacity-70","cursor-not-allowed");
 
     analyzeBtn.innerHTML = "🧠 AI Inspecting...";
 
@@ -389,6 +391,7 @@ analyzeBtn.addEventListener("click", async () => {
             document.getElementById("action").innerText = data.recommended_action;
 
             resultCard.classList.remove("hidden");
+            resultCard.classList.add("ring-2","ring-green-400");
 
             resultCard.scrollIntoView({
 
@@ -411,6 +414,7 @@ analyzeBtn.addEventListener("click", async () => {
     }
 
     analyzeBtn.disabled = false;
+    analyzeBtn.classList.remove("opacity-70","cursor-not-allowed");
 
     analyzeBtn.innerHTML = "🚀 Analyze Infrastructure";
 

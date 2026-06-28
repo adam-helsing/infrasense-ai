@@ -12,7 +12,6 @@ from database import init_db, save_report
 # ==============================
 
 load_dotenv()
-
 app = Flask(__name__)
 
 os.makedirs("uploads", exist_ok=True)
