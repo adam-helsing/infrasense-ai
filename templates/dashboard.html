@@ -1,106 +1,453 @@
 {% extends "base.html" %}
 
-{% block title %}Dashboard{% endblock %}
+{% block title %}InfraSense AI Dashboard{% endblock %}
 
 {% block content %}
 
-<div class="max-w-7xl mx-auto py-12 px-8">
+<div class="bg-slate-100 min-h-screen py-8">
 
-<h1 class="text-5xl font-bold mb-10 text-slate-800">
-📊 Dashboard
+<div class="max-w-7xl mx-auto px-6">
+
+<h1 class="text-4xl font-bold text-slate-800">
+📊 AI Infrastructure Dashboard
 </h1>
 
-<div class="grid md:grid-cols-4 gap-6">
 
-<div class="bg-blue-600 text-white rounded-2xl p-6 shadow-lg">
-<h2 class="text-lg">Total Reports</h2>
-<p class="text-4xl font-bold mt-4">{{ total_reports }}</p>
-</div>
+<p class="text-slate-500 mt-2 mb-8">
+Real-time monitoring of AI detected infrastructure issues.
+</p>
+<div class="mt-5 bg-blue-50 border border-blue-200 rounded-2xl p-5">
 
-<div class="bg-red-500 text-white rounded-2xl p-6 shadow-lg">
-<h2 class="text-lg">High Severity</h2>
-<p class="text-4xl font-bold mt-4">{{ high }}</p>
-</div>
+    <h3 class="font-bold text-lg">
+        🧠 AI Decision Support System
+    </h3>
 
-<div class="bg-yellow-500 text-white rounded-2xl p-6 shadow-lg">
-<h2 class="text-lg">Medium Severity</h2>
-<p class="text-4xl font-bold mt-4">{{ medium }}</p>
-</div>
-
-<div class="bg-green-600 text-white rounded-2xl p-6 shadow-lg">
-<h2 class="text-lg">Low Severity</h2>
-<p class="text-4xl font-bold mt-4">{{ low }}</p>
-</div>
+    <p class="text-slate-600 mt-2">
+        InfraSense AI analyzes citizen-reported infrastructure issues,
+        predicts risk trends, identifies hotspot locations, and provides
+        actionable recommendations for municipal authorities.
+    </p>
 
 </div>
+<!-- Statistics -->
 
-<h2 class="text-3xl font-bold mt-14 mb-6">
-Recent Reports
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+
+<div class="bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-2xl p-5 shadow-lg">
+<p class="text-sm">Total Reports</p>
+<h2 class="text-4xl font-bold mt-2">{{ total_reports }}</h2>
+</div>
+
+<div class="bg-gradient-to-r from-red-500 to-red-600 text-white rounded-2xl p-5 shadow-lg">
+<p class="text-sm">High Severity</p>
+<h2 class="text-4xl font-bold mt-2">{{ high }}</h2>
+</div>
+
+<div class="bg-gradient-to-r from-yellow-400 to-orange-500 text-white rounded-2xl p-5 shadow-lg">
+<p class="text-sm">Medium Severity</p>
+<h2 class="text-4xl font-bold mt-2">{{ medium }}</h2>
+</div>
+
+<div class="bg-gradient-to-r from-green-500 to-green-700 text-white rounded-2xl p-5 shadow-lg">
+<p class="text-sm">Low Severity</p>
+<h2 class="text-4xl font-bold mt-2">{{ low }}</h2>
+</div>
+
+</div>
+
+<h2 class="text-3xl font-bold text-slate-800 mb-6">
+🛰 Recent AI Inspection Reports
 </h2>
 
-<div class="overflow-x-auto bg-white rounded-2xl shadow-lg">
+{% if reports %}
 
-<table class="w-full">
 
-<thead class="bg-slate-100">
+<!-- ================================= -->
+<!-- AI Insights -->
+<!-- ================================= -->
 
-<tr>
+<div class="bg-white rounded-3xl shadow-xl p-8 mb-10">
 
-<th class="p-4 text-left">Category</th>
-<th class="p-4 text-left">Severity</th>
-<th class="p-4 text-left">Department</th>
-<th class="p-4 text-left">Confidence</th>
+<h2 class="text-2xl font-bold text-slate-800 mb-6">
+📈 AI Infrastructure Insights
+</h2>
 
-</tr>
+<div class="grid md:grid-cols-3 gap-6">
 
-</thead>
+<div class="bg-red-50 rounded-2xl p-6 border border-red-200">
 
-<tbody>
+<p class="text-red-500 font-semibold text-sm">
+🔥 Highest Risk Category
+</p>
+
+<h3 class="text-2xl font-bold mt-3">
+{{ highest_category }}
+</h3>
+
+<p class="text-slate-500 mt-2 text-sm">
+Most frequently reported infrastructure issue.
+</p>
+
+</div>
+
+<div class="bg-blue-50 rounded-2xl p-6 border border-blue-200">
+
+<p class="text-blue-500 font-semibold text-sm">
+📍 Hotspot Location
+</p>
+
+<h3 class="text-2xl font-bold mt-3">
+{{ hotspot_location }}
+</h3>
+
+<p class="text-slate-500 mt-2 text-sm">
+Location receiving maximum reports.
+</p>
+
+</div>
+
+<div class="bg-green-50 rounded-2xl p-6 border border-green-200">
+
+<p class="text-green-500 font-semibold text-sm">
+🤖 AI Prediction
+</p>
+
+<h3 class="text-xl font-bold mt-3">
+{{ ai_prediction }}
+</h3>
+
+<p class="text-slate-500 mt-2 text-sm">
+Generated automatically from historical reports.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="space-y-6">
+
+<!-- ================================= -->
+<!-- Analytics Dashboard -->
+<!-- ================================= -->
+
+<div class="grid lg:grid-cols-2 gap-6 mb-10">
+
+    <div class="bg-white rounded-3xl shadow-xl p-6">
+        <h3 class="text-xl font-bold mb-4">
+            📊 Severity Distribution
+        </h3>
+        <canvas id="severityChart"></canvas>
+    </div>
+
+    <div class="bg-white rounded-3xl shadow-xl p-6">
+        <h3 class="text-xl font-bold mb-4">
+            🏷️ Issue Categories
+        </h3>
+        <canvas id="categoryChart"></canvas>
+    </div>
+
+    <div class="bg-white rounded-3xl shadow-xl p-6">
+        <h3 class="text-xl font-bold mb-4">
+            📍 Top Hotspot Locations
+        </h3>
+        <canvas id="hotspotChart"></canvas>
+    </div>
+
+    <div class="bg-white rounded-3xl shadow-xl p-6">
+        <h3 class="text-xl font-bold mb-4">
+            📈 Daily Report Trend
+        </h3>
+        <canvas id="trendChart"></canvas>
+    </div>
+
+</div>    
+
 
 {% for report in reports %}
 
-<tr class="border-t hover:bg-slate-50">
+<div class="bg-white rounded-3xl shadow-xl overflow-hidden">
 
-<td class="p-4">{{ report.category }}</td>
+<div class="flex flex-col lg:flex-row">
 
-<td class="p-4">
+<!-- Image -->
 
-{% if report.severity=="High" %}
+<div class="lg:w-[35%] h-[500px] flex-shrink-0 overflow-hidden">
 
-<span class="text-red-600 font-bold">
-{{ report.severity }}
+    <img
+        src="/{{ report['image_path'] }}"
+        class="w-full h-full object-cover">
+
+</div>
+<!-- Details -->
+
+<div class="lg:w-[62%] p-6 flex-1">
+
+<div class="flex justify-between items-start">
+
+<div>
+
+<h2 class="text-2xl font-bold text-slate-800">
+{{ report['category'] }}
+</h2>
+
+<p class="text-slate-500 mt-1">
+🏢 {{ report['department'] }}
+</p>
+
+</div>
+
+{% if report['severity']=="High" %}
+
+<span class="bg-red-500 text-white px-4 py-2 rounded-full text-sm font-bold">
+🔴 HIGH
 </span>
 
-{% elif report.severity=="Medium" %}
+{% elif report['severity']=="Medium" %}
 
-<span class="text-yellow-600 font-bold">
-{{ report.severity }}
+<span class="bg-yellow-400 px-4 py-2 rounded-full text-sm font-bold">
+🟡 MEDIUM
 </span>
 
 {% else %}
 
-<span class="text-green-600 font-bold">
-{{ report.severity }}
+<span class="bg-green-500 text-white px-4 py-2 rounded-full text-sm font-bold">
+🟢 LOW
 </span>
 
 {% endif %}
 
-</td>
+</div>
 
-<td class="p-4">{{ report.department }}</td>
+<!-- NEW INFO -->
 
-<td class="p-4">{{ report.confidence }}</td>
+<div class="grid md:grid-cols-2 gap-4 mt-5">
 
-</tr>
+<div class="bg-slate-50 rounded-xl p-4">
+
+<p class="text-xs text-slate-500 font-semibold">
+📍 Location
+</p>
+
+<p class="mt-1 font-medium">
+{{ report['location'] or "Not Provided" }}
+</p>
+
+</div>
+
+<div class="bg-slate-50 rounded-xl p-4">
+
+<p class="text-xs text-slate-500 font-semibold">
+📌 Status
+</p>
+
+{% if report['status']=="Resolved" %}
+
+<span class="text-green-600 font-bold">
+✅ Resolved
+</span>
+
+{% elif report['status']=="In Progress" %}
+
+<span class="text-yellow-600 font-bold">
+🟡 In Progress
+</span>
+
+{% else %}
+
+<span class="text-red-600 font-bold">
+🔴 Pending
+</span>
+
+{% endif %}
+
+</div>
+
+</div>
+
+<!-- Description -->
+
+{% if report['description'] %}
+
+<div class="mt-5">
+
+<h3 class="font-bold mb-2">
+📝 Citizen Description
+</h3>
+
+<div class="bg-blue-50 border border-blue-200 rounded-xl p-4 text-sm leading-6">
+
+{{ report['description'] }}
+
+</div>
+
+</div>
+
+{% endif %}
+
+<!-- Confidence -->
+
+<div class="mt-5">
+
+<div class="flex justify-between text-sm">
+
+<span class="font-semibold">
+AI Confidence
+</span>
+
+<span class="font-bold text-blue-600">
+{{ report['confidence'] }}%
+</span>
+
+</div>
+
+<div class="bg-gray-200 h-2 rounded-full mt-2">
+
+<div
+class="bg-green-500 h-2 rounded-full"
+style="width: {{ report['confidence'] }}%;">
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Summary -->
+
+<div class="mt-5">
+
+<h3 class="font-bold mb-2">
+📄 AI Summary
+</h3>
+
+<div class="bg-slate-100 rounded-xl p-4 text-sm leading-6 text-slate-700">
+
+{{ report['summary'] }}
+
+</div>
+
+</div>
+
+<!-- Action -->
+
+<div class="mt-5">
+
+<h3 class="font-bold mb-2">
+⚡ Recommended Action
+</h3>
+
+<div class="bg-green-50 border border-green-200 rounded-xl p-4 text-sm leading-6 text-slate-700">
+
+{{ report['recommended_action'] }}
+
+</div>
+
+</div>
+
+<!-- Date -->
+
+<div class="mt-6 pt-4 border-t text-xs text-slate-500">
+
+🕒 Reported on:
+<strong>{{ report['created_at'] }}</strong>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
 
 {% endfor %}
 
-</tbody>
+</div>
 
-</table>
+{% else %}
+
+<div class="bg-white rounded-3xl shadow-xl p-14 text-center">
+
+<h2 class="text-3xl font-bold text-slate-700">
+No Reports Yet
+</h2>
+
+<p class="text-slate-500 mt-3">
+Upload an infrastructure image to generate your first AI inspection report.
+</p>
+
+</div>
+
+{% endif %}
 
 </div>
 
 </div>
+{% endblock %}
 
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const severityLabels = {{ severity_labels|tojson }};
+const severityData = {{ severity_data|tojson }};
+
+const categoryLabels = {{ category_labels|tojson }};
+const categoryData = {{ category_data|tojson }};
+
+const hotspotLabels = {{ hotspot_labels|tojson }};
+const hotspotData = {{ hotspot_data|tojson }};
+
+const trendLabels = {{ trend_labels|tojson }};
+const trendData = {{ trend_data|tojson }};
+
+new Chart(document.getElementById('severityChart'), {
+    type:'pie',
+    data:{
+        labels:severityLabels,
+        datasets:[{
+            data:severityData,
+            backgroundColor:['#ef4444','#facc15','#22c55e']
+        }]
+    }
+});
+
+new Chart(document.getElementById('categoryChart'), {
+    type:'bar',
+    data:{
+        labels:categoryLabels,
+        datasets:[{
+            label:'Reports',
+            data:categoryData,
+            backgroundColor:'#3b82f6'
+        }]
+    }
+});
+
+new Chart(document.getElementById('hotspotChart'), {
+    type:'bar',
+    data:{
+        labels:hotspotLabels,
+        datasets:[{
+            label:'Reports',
+            data:hotspotData,
+            backgroundColor:'#10b981'
+        }]
+    }
+});
+
+new Chart(document.getElementById('trendChart'), {
+    type:'line',
+    data:{
+        labels:trendLabels,
+        datasets:[{
+            label:'Daily Reports',
+            data:trendData,
+            borderColor:'#6366f1',
+            tension:.3
+        }]
+    }
+});
+</script>
 {% endblock %}

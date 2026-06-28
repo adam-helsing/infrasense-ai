@@ -1,31 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
+
+
+    <!-- Navigation -->
+<nav class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto flex justify-between items-center px-8 py-5">
+
+      <a href="/" class="text-2xl font-bold">
+    <span class="text-blue-600">Infra</span><span class="text-slate-800">Sense</span><span class="text-cyan-500">AI</span>
+</a>
+
+        <div class="hidden md:flex gap-8 text-slate-700 font-medium">
+           <a href="/" class="hover:text-blue-600 transition">Home</a>
+
+        <a href="/report" class="hover:text-blue-600 transition">Report Issue</a>
+        <a href="/dashboard" class="hover:text-blue-600 transition">Dashboard</a>
+        </div>
+
+        
+
+    </div>
+</nav>
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>{% block title %}InfraSense AI{% endblock %}</title>
 
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+
+    <style>
+
+        *{
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+
+            background:
+            radial-gradient(circle at top right,#dbeafe 0%,transparent 30%),
+            radial-gradient(circle at bottom left,#cffafe 0%,transparent 35%),
+            #f8fafc;
+
+            min-height:100vh;
+
+            color:#1e293b;
+
+        }
+
+        html{
+
+            scroll-behavior:smooth;
+
+        }
+
+        .glass{
+
+            background:rgba(255,255,255,.75);
+
+            backdrop-filter:blur(18px);
+
+            border:1px solid rgba(255,255,255,.45);
+
+        }
+
+        .card{
+
+            transition:.35s;
+
+        }
+
+        .card:hover{
+
+            transform:translateY(-8px);
+
+            box-shadow:0 18px 40px rgba(0,0,0,.12);
+
+        }
+
+        .gradient-text{
+
+            background:linear-gradient(90deg,#2563eb,#06b6d4);
+
+            -webkit-background-clip:text;
+
+            -webkit-text-fill-color:transparent;
+
+        }
+
+        .fade{
+
+            animation:fade .6s ease;
+
+        }
+
+        @keyframes fade{
+
+            from{
+
+                opacity:0;
+
+                transform:translateY(20px);
+
+            }
+
+            to{
+
+                opacity:1;
+
+                transform:translateY(0);
+
+            }
+
+        }
+
+        ::-webkit-scrollbar{
+
+            width:10px;
+
+        }
+
+        ::-webkit-scrollbar-thumb{
+
+            background:#3b82f6;
+
+            border-radius:20px;
+
+        }
+
+        ::-webkit-scrollbar-track{
+
+            background:#e5e7eb;
+
+        }
+
+    </style>
+
+    <style>
+    .fade-up {
+    opacity: 0;
+    transform: translateY(18px);
+    animation: fadeUp 0.7s ease-out forwards;
+    }
+
+    .fade-delay-1 { animation-delay: 0.1s; }
+    .fade-delay-2 { animation-delay: 0.2s; }
+    .fade-delay-3 { animation-delay: 0.3s; }
+
+    @keyframes fadeUp {
+        to {
+        opacity: 1;
+        transform: translateY(0);
+        }
+    }
+
+    .soft-hover {
+        transition: all 0.25s ease;
+    }
+
+    .soft-hover:hover {
+        transform: translateY(-6px);
+    }
+    </style>
+
+    <style>
+    .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.7s ease;
+    }
+
+    .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+    }
+</style>
 </head>
 
-<body>
+<body class="fade">
 
 {% block content %}
-
 {% endblock %}
 
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+
+{% block scripts %}{% endblock %}
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const elements = document.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("active");
+            }
+        });
+    }, {
+        threshold: 0.15
+    });
+
+    elements.forEach(el => observer.observe(el));
+
+});
+</script>
 
 </body>
 </html>

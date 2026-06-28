@@ -2,13 +2,13 @@ import os
 import json
 from PIL import Image
 from dotenv import load_dotenv
-from google import genai
+import google.generativeai as genai
 
 load_dotenv()
 
-client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
-MODEL = "gemini-2.5-flash"
+MODEL = "gemini-1.5-flash"
 
 
 def analyze_image(image_path):
@@ -16,49 +16,134 @@ def analyze_image(image_path):
     image = Image.open(image_path)
 
     prompt = """
-You are an expert civic infrastructure inspector.
+You are InfraSense AI, an advanced AI system for smart city infrastructure inspection.
 
-Analyze the uploaded image carefully.
+Your task is to inspect the uploaded image exactly like a professional municipal engineer.
+
+Analyze ONLY what is visible in the image.
 
 Return ONLY valid JSON.
+
+Do NOT use markdown.
+Do NOT explain anything.
+Do NOT wrap the JSON.
+
+JSON FORMAT
 
 {
   "category":"",
   "severity":"",
   "department":"",
-  "confidence":"",
+  "confidence":0,
   "summary":"",
   "recommended_action":""
 }
 
-Rules:
-- category should be one of:
-Pothole,
-Garbage,
-Water Leakage,
-Broken Streetlight,
-Road Damage,
-Drainage Issue,
-Other
+VALID CATEGORIES
 
-- severity should be:
-Low
-Medium
+- Pothole
+- Road Damage
+- Garbage
+- Water Leakage
+- Drainage Issue
+- Broken Streetlight
+- Electrical Hazard
+- Building Damage
+- Traffic Sign Damage
+- Public Safety Hazard
+- Fallen Tree
+- Road Obstruction
+- Other
+
+SEVERITY
+
 High
+Medium
+Low
 
-- confidence should be percentage.
+DEPARTMENT
+
+Road Authority
+Municipal Corporation
+Water Department
+Electricity Board
+Public Works Department
+Traffic Police
+Disaster Management
+
+CATEGORY MAPPING
+
+Pothole -> Road Authority
+
+Road Damage -> Road Authority
+
+Garbage -> Municipal Corporation
+
+Drainage Issue -> Municipal Corporation
+
+Water Leakage -> Water Department
+
+Broken Streetlight -> Electricity Board
+
+Electrical Hazard -> Electricity Board
+
+Building Damage -> Public Works Department
+
+Traffic Sign Damage -> Traffic Police
+
+Public Safety Hazard -> Municipal Corporation
+
+Fallen Tree -> Disaster Management
+
+Road Obstruction -> Municipal Corporation
+
+Other -> Public Works Department
+
+IMPORTANT RULES
+
+1. Detect ONLY ONE primary issue.
+
+2. Never invent objects that are not visible.
+
+3. Confidence must be an integer between 80 and 99.
+
+4. Summary must be less than 35 words.
+
+5. Recommended action must be less than 20 words.
+
+6. Prefer the MOST SPECIFIC category instead of Other.
+
+7. If exposed wires, damaged electrical poles, hanging cables or broken electrical fixtures exist, classify as Electrical Hazard.
+
+8. If cracks, broken walls, damaged public buildings or collapsing structures exist, classify as Building Damage.
+
+9. If road is blocked by objects, classify as Road Obstruction.
+
+10. If fallen branches or trees block roads, classify as Fallen Tree.
+
+11. If no infrastructure issue is clearly visible, return category as Other.
 
 Return ONLY JSON.
 """
-
-    response = client.models.generate_content(
-        model=MODEL,
+    model = genai.GenerativeModel(MODEL)
+    response = model.generate_content(
         contents=[prompt, image]
     )
 
     text = response.text.strip()
 
-    if text.startswith("```"):
+    if "```" in text:
         text = text.replace("```json", "").replace("```", "").strip()
 
-    return json.loads(text)
+    try:
+        return json.loads(text)
+
+    except Exception:
+        return {
+            "category": "Other",
+            "severity": "Low",
+            "department": "Public Works Department",
+            "confidence": 80,
+            "summary": "Unable to analyze image.",
+            "recommended_action": "Please upload a clearer image."
+        }
